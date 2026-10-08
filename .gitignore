@@ -1,0 +1,13 @@
+# Pliki kompilacji 
+*.ali
+*.o
+*.b~*
+b~*
+
+# Katalogi wyjsciowe
+bin/
+obj/
+
+# Pliki wykonywalne
+*.exe
+main
