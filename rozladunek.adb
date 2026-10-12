@@ -9,7 +9,7 @@ package body rozladunek is
       G : losowe.generator;
       bufor : array (0 .. pojemnosc_rampy - 1) of partia; 
       poczatek : Natural := 0; 
-      liczba : natural := 0; 
+      liczba : Natural := 0; 
       zamknieta : Boolean := False; 
       biezaca : dostawa; 
 
@@ -46,7 +46,7 @@ package body rozladunek is
                   nadzor.monitor.dostawa_obsluzona;
                or 
                   when liczba > 0 or else zamknieta =>
-                     accept pobierz_partie (P : out partia, koniec : out Boolean) do 
+                     accept pobierz_partie (P : out partia; koniec : out Boolean) do 
                         koniec := liczba = 0; 
                         if liczba > 0 then 
                            P := bufor (poczatek); 
@@ -59,9 +59,10 @@ package body rozladunek is
                      end pobierz_partie; 
                or 
                   when not zamknieta => 
-                     accept zamknij; 
-                     zamknieta := True; 
-                     pisz ("rampa zamknieta");
+                     accept zamknij do
+                        zamknieta := True; 
+                        pisz ("rampa zamknieta");
+                     end zamknij;
                or 
                   terminate;
                end select;
