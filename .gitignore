@@ -11,3 +11,6 @@ obj/
 # Pliki wykonywalne
 *.exe
 main
+
+# Visual Studio 
+.vs/
