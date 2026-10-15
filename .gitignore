@@ -14,3 +14,7 @@ main
 
 # Visual Studio 
 .vs/
+
+# Alire
+/alire/
+/config/
