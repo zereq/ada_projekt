@@ -1,0 +1,12 @@
+name = "ada_project"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["Eryk Marszalkowski"]
+maintainers = ["Eryk Marszalkowski <erykowskim@gmail.com>"]
+maintainers-logins = ["erykmarszalkowski"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+executables = ["ada_project"]
