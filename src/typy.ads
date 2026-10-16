@@ -51,7 +51,7 @@ type liczniki is array (Priorytet) of Natural;
 type stan_magazynu is record
    zapas : ilosc := (others => 0);
    zapelnienie : natural := 0;
-   zalozone : liczniki := (others => 0);
+   zlozone : liczniki := (others => 0);
    zrealizowane : liczniki := (others => 0);
    oczekujace : liczniki := (others => 0);
    odrzucone : liczniki := (others => 0);
