@@ -5,9 +5,9 @@ with magazynowanie;
 with losowe;
 with nadzor;
 
-package body roboty is
+package body Transport is
 
-   task body robot is
+   task body Robot is
       G        : losowe.generator;
       moje_id  : id_robota;
       P        : partia;
@@ -37,7 +37,7 @@ package body roboty is
 
          --sprawdzenie czy rampa zamknieta i nie ma towru
          if koniec then
-            zmien_stan (wylaczony);,
+            zmien_stan (wylaczony);
             pisz ("Robot R" & Img (moje_id) & " zakonczyl prace", cyjan);
             exit; 
          end if;
@@ -57,6 +57,6 @@ package body roboty is
          zmien_stan(wolny);
 
       end loop;
-   end robot;
-end roboty;
+   end Robot;
+end Transport;
          

@@ -3,7 +3,7 @@ with Klienci;
 with Log; use Log;
 with Nadzor;
 with Rozladunek;
-with roboty;
+with Transport;
 with Typy; use Typy;
 
 procedure Ada_Project is
@@ -11,7 +11,7 @@ begin
    Pisz ("Start symulacji magazynu - Hurtownia farmaceutyczna", Niebieski);
 
    declare 
-      Roboty: array (Id_robota) of roboty.robot;
+      Roboty: array (Id_robota) of Transport.Robot;
    begin
       for R in Roboty'Range loop
          Roboty (R).Start (R);

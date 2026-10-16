@@ -50,8 +50,8 @@ package body Nadzor is
       begin
          loop
             select
-               accept Zglos_stan (R: Id_Robota; S: Stany) do
-                  Roboty (R) := S;
+               accept Zglos_stan (Id: Id_Robota; Stan: Stany) do
+                  Roboty (Id) := Stan;
                end Zglos_stan;
             or
                accept Dostawa_obsluzona do
@@ -60,8 +60,8 @@ package body Nadzor is
             or
                accept Koniec do
                   Drukuj ("Raport końcowy");
-                  exit;
                end Koniec;
+               exit;
             or
                delay until Nastepny;
                   Drukuj ("Raport okresowy");

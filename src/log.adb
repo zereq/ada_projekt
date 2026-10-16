@@ -57,12 +57,12 @@ begin
       & (if sekundy < 10 then "0" else "") & Img (sekundy) & "." & Img (dziesiate mod 10) & "]";
 end czas;
 
-procedure pisz (tekst : Wide_Wide_String; barwa : kolor) is 
+procedure pisz (tekst : Wide_Wide_String; barwa : kolor := zwykly) is 
 begin
    konsola.wypisz (czas & " " & pokoloruj (Tekst, barwa));
 end pisz; 
 
-procedure pisz_blok (Tekst : Wide_Wide_String; barwa : kolor) is
+procedure pisz_blok (Tekst : Wide_Wide_String; barwa : kolor := zwykly) is
 begin
    konsola.wypisz (pokoloruj (Tekst, barwa));
 end pisz_blok; 
