@@ -10,7 +10,7 @@ procedure Ada_Project is
 begin
    Pisz ("Start symulacji magazynu - Hurtownia farmaceutyczna", Niebieski);
 
-   declare 
+   declare
       Roboty: array (Id_robota) of Transport.Robot;
    begin
       for R in Roboty'Range loop

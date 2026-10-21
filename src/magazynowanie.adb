@@ -31,12 +31,12 @@ package body Magazynowanie is
 
       -- obsluguje wydawanie zamowien
       procedure Wydaj (Z: Zamowienie) is
-      begin 
+      begin
          Zapas (Z.Rodzaj) := Zapas (Z.Rodzaj) - Z.Ilosc;
          Zrealizowane (Z.Prio) := Zrealizowane (Z.Prio) + 1;
          delay Losowe.Czas (G, 0.2, 0.5);
 
-         Pisz ("Zamowienie " & Nazwa (Z) & "(" & Nazwa (Z.Prio) & ") zrealizowane: "
+         Pisz ("Zamówienie " & Nazwa (Z) & " (" & Nazwa (Z.Prio) & ") zrealizowane: "
             & Img (Z.Ilosc) & " szt. " & Nazwa (Z.Rodzaj) & " - "
             & Opis_Zapelnienia, Zielony);
       end Wydaj;

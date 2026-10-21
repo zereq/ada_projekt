@@ -1,7 +1,8 @@
 with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Strings.Wide_Wide_Unbounded; use Ada.Strings.Wide_Wide_Unbounded;
+with Ada.Task_Identification; use Ada.Task_Identification;
 with Log; use Log;
-with Magazynowanie; 
+with Magazynowanie;
 
 package body Nadzor is
 

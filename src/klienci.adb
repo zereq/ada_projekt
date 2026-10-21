@@ -12,7 +12,7 @@ package body Klienci is
          accept Start (Nr: Positive) do
             Z.klient := Nr;
          end Start;
-         
+
          Losowe.inicjuj (G, 200+Z.klient);
 
          for K in 1 .. zamowienia_szpitala loop
@@ -36,10 +36,10 @@ package body Klienci is
          accept Start (Nr: Positive) do
             Z.klient := Nr;
          end Start;
-         
+
          Losowe.inicjuj (G, 300+Z.klient);
 
-         for K in 1 .. zamowienia_szpitala loop
+         for K in 1 .. zamowienia_aptek loop
             delay Losowe.czas(G, 4.0, 10.0);
             Z.nr := K;
             Z.rodzaj := Losowe.losowy_towar(G);
@@ -47,7 +47,7 @@ package body Klienci is
             Pisz ("Apteka A" & Img (Z.Klient) & ": ZWYKŁE zamówienie "
                & Nazwa (Z) & " - " & Img (Z.Ilosc) & " szt. "
                & Nazwa (Z.Rodzaj), Fioletowy);
-            
+
             loop
                select
                   Magazynowanie.Magazyn.Zamowienie_Zwykle (Z);

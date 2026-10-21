@@ -41,6 +41,7 @@ package body Transport is
          Pisz ("Robot R" & Img (Moje_Id) & " pobrał " & Img (P.Ilosc)
                & " szt. " & Nazwa (P.Rodzaj) & " (dostawa D"
                & Img (P.id_dostawy) & ")", Cyjan);
+         Pisz ("Robot R" & Img (Moje_Id) & " jedzie do magazynu", Cyjan);
          delay Losowe.Czas (G, 1.0, 2.5);
 
          Proby := 0;
@@ -69,8 +70,8 @@ package body Transport is
          Zmien_Stan (Wraca);
          delay Losowe.Czas (G, 0.5, 1.5);
          Zmien_Stan (Wolny);
+         Pisz ("Robot R" & Img (Moje_Id) & " jest ponownie wolny", Cyjan);
       end loop;
    end Robot;
 
 end Transport;
-         

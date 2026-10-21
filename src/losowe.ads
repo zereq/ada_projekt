@@ -1,7 +1,7 @@
 with Ada.Numerics.Float_Random;
 with typy;
 
-package losowe is 
+package losowe is
 
    subtype generator is Ada.Numerics.Float_Random.generator;
 
