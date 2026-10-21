@@ -8,7 +8,7 @@ package body Nadzor is
    task body Monitor is
       Roboty: array (Id_Robota) of stany := (others => wolny);
       Dostawy: Natural := 0;
-      Okres: constant Time_Span := To_Time_Span (Okres_Raportu);
+      Okres: constant Time_Span := To_Time_Span (Okres_Raportu * Tempo);
       Nastepny: Time := Clock + Okres;
 
       procedure Drukuj (Tytul : Wide_Wide_String) is

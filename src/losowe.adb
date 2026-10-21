@@ -18,7 +18,8 @@ package body losowe is
 
    function czas (G : in out generator; min, max : Duration) return Duration is 
    begin
-      return min + Duration (Float (max - min) * FR.Random (G));
+      -- mnozymy przez stala tempo, zeby spowolnic wyswietlanie do odczytu
+      return min + Duration (Float (max - min) * FR.Random (G)) * Typy.Tempo; 
    end czas; 
 
    function losowy_towar (G : in out generator) return typy.towar is 

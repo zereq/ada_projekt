@@ -1,62 +1,76 @@
-with log;          use log;
-with typy;         use typy;
-with rozladunek;   
-with magazynowanie;
-with losowe;
-with nadzor;
+with Log;  use Log;
+with Losowe;
+with Magazynowanie;
+with Nadzor;
+with Rozladunek;
 
 package body Transport is
 
    task body Robot is
-      G        : losowe.generator;
-      moje_id  : id_robota;
-      P        : partia;
-      koniec   : Boolean := False;
-      stan     : stany := wylaczony;
-      
-      --procedura poinformawania monitora o zmianie stanu
-      procedure zmien_stan (nowy_stan : stany) is
-      begin
-         stan := nowy_stan;
-         nadzor.monitor.zglos_stan (moje_id, stan);
-      end zmien_stan;
-      
-      begin
-      accept start (id : id_robota) do
-         moje_id := id;
-      end start;
+      G       : Losowe.Generator;
+      Moje_Id : Id_Robota;
+      P       : Partia;
+      Koniec  : Boolean := False;
+      Proby   : Natural;
 
-      --init generatora liczb losowych dla robota
-      losowe.inicjuj (G, 100 + moje_id);
-      stan := wolny;
-      pisz ("Robot " & Img (moje_id) & " gotowy do pracy", cyjan);
+      --  Procedura informowania monitora o zmianie stanu
+      procedure Zmien_Stan (Nowy_Stan : stany) is
+      begin
+         Nadzor.Monitor.Zglos_Stan (Moje_Id, Nowy_Stan);
+      end Zmien_Stan;
+
+   begin
+      accept Start (Id : Id_Robota) do
+         Moje_Id := Id;
+      end Start;
+
+      --  Inicjalizacja generatora liczb losowych dla robota
+      Losowe.Inicjuj (G, 100 + Moje_Id);
+      Pisz ("Robot R" & Img (Moje_Id) & " gotowy do pracy", Cyjan);
 
       loop
-         --robot prosi rampe o ladunek
-         rozladunek.rampa.pobierz_partie (P, koniec);
+         Rozladunek.Rampa.Pobierz_Partie (P, Koniec);
 
-         --sprawdzenie czy rampa zamknieta i nie ma towru
-         if koniec then
-            zmien_stan (wylaczony);
-            pisz ("Robot R" & Img (moje_id) & " zakonczyl prace", cyjan);
-            exit; 
+         if Koniec then
+            Zmien_Stan (Wylaczony);
+            Pisz ("Robot R" & Img (Moje_Id) & " zakończył pracę", Cyjan);
+            exit;
          end if;
 
-         --robot pobral partie
-         zmien_stan (jedzie);
-         pisz ("Robot " & Img (moje_id) & " pobral " & Img (P.ilosc) & " szt. "
-               & Nazwa (P.rodzaj) & " (Dostawa D" & Img (P.id_dostawy) & ")", cyjan);
-         
-         delay losowe.czas(G, 1.0, 2.5);
-         zmien_stan (czeka);
-         --przekazanie towaru do magazynu
-         magazynowanie.magazyn.przyjmij (P.rodzaj, P.ilosc);
-         --powrot po next partie
-         zmien_stan (wraca);
-         delay losowe.czas (G, 0.5, 1.5);
-         zmien_stan(wolny);
+         Zmien_Stan (Jedzie);
+         Pisz ("Robot R" & Img (Moje_Id) & " pobrał " & Img (P.Ilosc)
+               & " szt. " & Nazwa (P.Rodzaj) & " (dostawa D"
+               & Img (P.id_dostawy) & ")", Cyjan);
+         delay Losowe.Czas (G, 1.0, 2.5);
 
+         Proby := 0;
+         loop
+            select
+               Magazynowanie.Magazyn.Przyjmij (P.Rodzaj, P.Ilosc);
+               Pisz ("Robot R" & Img (Moje_Id) & " dostarczył towar", Cyjan);
+               exit;
+            or
+               delay 2.0 * Tempo;
+               Proby := Proby + 1;
+               if Proby = 1 then
+                  Zmien_Stan (Czeka);
+               end if;
+               if Proby >= Proby_Magazynu then
+                  Pisz ("Robot R" & Img (Moje_Id) & ": magazyn wciąż pełny"
+                        & " - partia odesłana do magazynu zewnętrznego",
+                        Czerwony);
+                  exit;
+               end if;
+               Pisz ("Robot R" & Img (Moje_Id)
+                     & " czeka - brak miejsca w magazynie", Szary);
+            end select;
+         end loop;
+
+         Zmien_Stan (Wraca);
+         delay Losowe.Czas (G, 0.5, 1.5);
+         Zmien_Stan (Wolny);
       end loop;
    end Robot;
+
 end Transport;
          

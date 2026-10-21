@@ -20,7 +20,7 @@ package body dostawy is
       D.rodzaj := losowe.losowy_towar (G);
       D.ilosc := losowe.liczba (G, min_dostawy, max_dostawy);
 
-      delay Duration (4 * (D.id - 1)) + losowe.czas (G, 0.0, 3.0);
+      delay Duration (4 * (D.id - 1)) * Tempo + losowe.czas (G, 0.0, 3.0);
 
       pisz ("przyjazd samochodu dostaw" & Img (D.id) & " (" & Nazwa (D.Rodzaj) & ", " & Img (D.ilosc) & " szt.)", zolty);
       pisz("D" & Img (D.id) & " oczekuje na rozladunek");

@@ -54,7 +54,9 @@ function czas return Wide_Wide_String is
    sekundy : constant Natural := Dziesiate / 10; 
 begin 
    return "["
-      & (if sekundy < 10 then "0" else "") & Img (sekundy) & "." & Img (dziesiate mod 10) & "]";
+  & (if Sekundy < 10 then "00" elsif Sekundy < 100 then "0" else "")
+  & Img (Sekundy) & "." & Img (Dziesiate mod 10) & "]";
+
 end czas;
 
 procedure pisz (tekst : Wide_Wide_String; barwa : kolor := zwykly) is 

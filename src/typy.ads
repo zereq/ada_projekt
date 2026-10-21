@@ -20,6 +20,7 @@ pojemnosc_rampy : constant := 6;
 max_oczekujacych : constant := 8;
 proby_magazynu : constant := 5; 
 okres_raportu : constant duration := 6.0; 
+Tempo : constant := 3;
 
 
 subtype id_robota is Positive range 1 .. liczba_robotow;
